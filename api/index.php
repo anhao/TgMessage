@@ -9,30 +9,32 @@ $bot = new Bot();
 if ($type === 'webhook') {
     // 获取/token 命令，获取聊天 id
     $data = json_decode(file_get_contents("php://input"), true);
-    $message = $data['message']['text'];
+    $message = $data['message']['text'] ?? '';
     if ($message === '/token') {
         $chat_id = $data['message']['chat']['id'];
         $bot->sendMessage(['text' => $bot->encryption($chat_id), 'chat_id' => $chat_id]);
     }
-    return json_encode(['code' => 200, 'message' => 'success']);
+    echo json_encode(['code' => 200, 'message' => 'success']);
 } else {
     if (is_null($token)) {
-        return json_encode(['code' => 422, 'message' => 'token 不能为空']);
+        echo json_encode(['code' => 422, 'message' => 'token 不能为空']);
     } else {
         // 发送消息
         $chat_id = $bot->decryption($token);
         $ret = $bot->sendMessage(['text' => $message, 'chat_id' => $chat_id]);
         if ($ret['ok']) {
-            return json_encode(['code' => 200, 'message' => 'success']);
+            echo json_encode(['code' => 200, 'message' => 'success']);
         } else {
-            return json_encode(['code' => 422, 'message' => 'error']);
+            echo json_encode(['code' => 422, 'message' => 'error']);
         }
     }
 }
 
 class Bot
 {
+    // chat_id sign key
     public string $key = "abc";
+    //Bot Token
     public string $token = "1679016407:AAEHII057c26C5_vY8tSLbO8G6mnyXUOYbM";
 
     public function sendMessage($data): array
