@@ -6,11 +6,11 @@
   },
   "routes": [
     {
-      "src": "setWebHook",
+      "src": "/setWebHook",
       "dest": "/api/setWebHook.php"
     },
     {
-      "src": "webhook",
+      "src": "/webhook",
       "dest": "/api/webhook.php"
     }
   ]
