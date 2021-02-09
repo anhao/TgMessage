@@ -32,54 +32,46 @@ token - 获取token
 ![oEcR1.png](https://ooo.0x0.ooo/2021/02/07/oEcR1.png)
 ![oEd9I.png](https://ooo.0x0.ooo/2021/02/07/oEd9I.png)
 
-### 克隆本仓库
 
-上面创建好机器人之后，fork 本参考到你的 github 里面 需要修改一个文件配置. `api/index.php`
-主要是修改 机器人 token ，在 38 行，把 token 换成你的机器人 token 可以通过 github 在线编辑代码直接修改。
+## 部署到 Vercel
 
-![oEYyF.png](https://ooo.0x0.ooo/2021/02/07/oEYyF.png)
+点击首页的 Deploy 跳到 vercel
+![oSgul.png](https://ooo.0x0.ooo/2021/02/10/oSgul.png)
 
-### 创建 Vercel
+输入项目名，然后确认
 
-Vercel：https://vercel.com/  
-可以直接使用 github 账户登录 创建好了账户之后在控制台选择 `New Project`
+![oSpFg.png](https://ooo.0x0.ooo/2021/02/10/oSpFg.png)
 
-![oE2El.png](https://ooo.0x0.ooo/2021/02/07/oE2El.png)
+确认之后会直接部署到 vercel
 
-然后找到你 fork 的仓库，点击 `import`，就会自动部署了。
+### 设置环境变量
 
-![oEXhB.png](https://ooo.0x0.ooo/2021/02/07/oEXhB.png)
+vercel 部署好了之后，然后设置环境变量
 
-部署成功之后，会有免费的域名，然后接下来设置机器人的 webhook.
+在控制台点击你创建好的项目，然后点击设置，添加环境变量
 
-![oEIjK.png](https://ooo.0x0.ooo/2021/02/07/oEIjK.png)
+![设置vercel 环境变量](https://ooo.0x0.ooo/2021/02/09/oSyEb.png)
 
-### 设置 WebHook
-设置机器人 webhook, 把下面的 token 和 域名换成你的(把{}去掉)， 然后执行 `curl
-
-```shell
-curl --location --request POST 'https://api.telegram.org/bot{你的token}/setWebhook' \
---form 'url="https://{你的域名}/api?type=webhook"'
 ```
-参考文档：https://core.telegram.org/bots/api#setwebhook
+需要设置4个环境变量，1个是必填的
 
-php 执行 set webhook 脚本
-```php
-<?php
-
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://api.telegram.org/bot{你的token}/setWebhook',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => array('url' => 'https://{你的域名}/api?type=webhook'),
-));
-
-$response = curl_exec($curl);
+token: bot 机器人的token
+sign_key: 加密 chat_id 需要用到，不设置默认为 abc
+url: webhook 回调地址, 不设置的话请求 setWebhook 时需要手动加参数， webhook url 地址为：https://你的域名/webhook
+key: 设置 webhook 的请求参数
 ```
+
+![oSJRB.png](https://ooo.0x0.ooo/2021/02/10/oSJRB.png)
+
+上面的环境变量设置好了之后，可能不会立马生效，你可以重新构建一下函数
+
+![oSP9s.png](https://ooo.0x0.ooo/2021/02/10/oSP9s.png)
+
+### 设置回调
+设置 webhook ，可以直接通过浏览器请求来设置
+
+webhook地址为：`https://你的域名/webhook`
+
+浏览器窗口打开：`https://你的域名/setwebhook?key=环境变量设置的KEY&url=你的webhook地址`
+
+`code` 返回 200 就是设置成功了~
