@@ -3,5 +3,15 @@
     "api/*.php": {
       "runtime": "vercel-php@0.4.0"
     }
-  }
+  },
+  "routers": [
+    {
+      "src": "setWebHook",
+      "dest": "/api/setWebHook.php"
+    },
+    {
+      "src": "webhook",
+      "dest": "/api/webhook.php"
+    }
+  ]
 }
