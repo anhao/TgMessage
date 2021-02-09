@@ -4,7 +4,7 @@
       "runtime": "vercel-php@0.4.0"
     }
   },
-  "routers": [
+  "routes": [
     {
       "src": "setWebHook",
       "dest": "/api/setWebHook.php"
