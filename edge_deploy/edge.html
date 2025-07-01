@@ -736,20 +736,19 @@
     <h2 id="-">接口名称</h2>
     <h3 id="1-">1) 边缘函数地址</h3>
     <blockquote>
-        <p>你的边缘函数触发地址, 例如： <code>https://your-domain.com/edge-function</code></p>
+        <p>你的边缘函数触发地址, 例如： <code>https://your-domain.com/</code></p>
     </blockquote>
     <h3 id="2-http-get-post">2) 调用方式：HTTP GET / POST</h3>
     <h3 id="3-">3) 接口描述：</h3>
     <ul>
-        <li>TG版消息推送机器人, 由 <strong>腾讯云边缘函数</strong> 强力驱动.</li>
+        <li>TG版消息推送机器人, 由 <strong>腾讯云 Page Functions</strong> 强力驱动.</li>
         <li>关注机器人 <a href="https://t.me/msg_sause_bot">MessageBot</a> (或你自己的Bot).</li>
         <li>向机器人发送 <code>/token</code> 获取你的专属 Token.</li>
-        <li>你需要在腾讯云控制台为你的边缘函数配置三个环境变量: <code>TG_TOKEN</code>, <code>TG_SIGN_KEY</code>, <code>ADMIN_KEY</code>.</li>
+        <li>你需要在腾讯云控制台为你的边缘函数配置三个环境变量: <code>token</code>, <code>sign_key</code>, <code>key</code>.</li>
     </ul>
-    <h3 id="4-">4) 请求参数:</h3>
-    <p>通过 URL 参数 <code>type</code> 来区分不同的操作。</p>
+    <h3 id="4-">4) 请求 API:</h3>
 
-    <h4>type = sendMessage (发送消息)</h4>
+    <h4>/sendMessage (发送消息)</h4>
     <table>
         <thead>
         <tr>
@@ -760,12 +759,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>type</td>
-            <td style="text-align:center">string</td>
-            <td style="text-align:center">Y</td>
-            <td style="text-align:right">固定为 <code>sendMessage</code></td>
-        </tr>
         <tr>
             <td>token</td>
             <td style="text-align:center">string</td>
@@ -781,10 +774,10 @@
         </tbody>
     </table>
     <p>请求示例:</p>
-    <pre><code>GET /edge-function?type=sendMessage&token=YOUR_TOKEN&message=Hello+World
+    <pre><code>GET /sendMessage?token=YOUR_TOKEN&message=Hello+World
 </code></pre>
 
-    <h4>type = setWebhook (设置回调)</h4>
+    <h4>/setWebhook (设置回调)</h4>
     <table>
         <thead>
         <tr>
@@ -796,31 +789,25 @@
         </thead>
         <tbody>
         <tr>
-            <td>type</td>
-            <td style="text-align:center">string</td>
-            <td style="text-align:center">Y</td>
-            <td style="text-align:right">固定为 <code>setWebhook</code></td>
-        </tr>
-        <tr>
             <td>key</td>
             <td style="text-align:center">string</td>
             <td style="text-align:center">Y</td>
-            <td style="text-align:right">你在环境变量中设置的 <code>ADMIN_KEY</code></td>
+            <td style="text-align:right">你在环境变量中设置的 <code>key</code></td>
         </tr>
         <tr>
             <td>url</td>
             <td style="text-align:center">string</td>
-            <td style="text-align:center">N</td>
-            <td style="text-align:right">可选, 自定义 webhook 地址, 默认为当前函数地址 + <code>?type=webhook</code></td>
+            <td style-="text-align:center">N</td>
+            <td style="text-align:right">可选, 自定义 webhook 地址, 默认为当前函数地址 + <code>/webhook</code></td>
         </tr>
         </tbody>
     </table>
     <p>请求示例:</p>
-    <pre><code>GET /edge-function?type=setWebhook&key=YOUR_ADMIN_KEY
+    <pre><code>GET /setWebhook?key=YOUR_ADMIN_KEY
 </code></pre>
 
-    <h4>type = webhook (接收回调)</h4>
-    <p>此类型用于接收来自 Telegram 的 POST 请求，通常无需手动调用。</p>
+    <h4>/webhook (接收回调)</h4>
+    <p>此接口用于接收来自 Telegram 的 POST 请求，通常无需手动调用。</p>
 
 
     <h3 id="5-">5) 请求返回结果:</h3>
