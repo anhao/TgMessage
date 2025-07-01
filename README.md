@@ -1,6 +1,6 @@
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fanhao%2FTGMessage)
 
-[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fanhao%2FTGMessage&project-name=tg-message&build-command=&install-command=&output-directory=./edge_deploy&root-directory=./&env=token,sign_key&env-description=)
+[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fanhao%2FTGMessage&project-name=tg-message&build-command=&install-command=&output-directory=edge_deploy&root-directory=./&env=token,sign_key&env-description=)
 
 ## 技术赞助
 本项目的 CDN 加速和安全防护由 [亚洲最佳CDN、边缘和安全解决方案 - Tencent EdgeOne](https://edgeone.ai/?utm_source=TgMessage) 赞助。
