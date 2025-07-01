@@ -1,6 +1,38 @@
-## TG Bot
+[一键部署 vercel](httpshttps://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fanhao%2FTGMessage)
 
-TG 消息推送机器人,基于 vercel 函数搭建的TG消息推送机器人，无需服务器。
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fanhao%2FTGMessage)
+
+[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fanhao%2FTGMessage)
+
+## 技术赞助
+本项目的 CDN 加速和安全防护由 [Tencent EdgeOne](https://edgeone.ai/) 赞助。
+
+
+<a href="https://edgeone.ai/">
+  <img width="200" src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="Tencent EdgeOne">
+</a>
+
+## Edge Functions 版本
+
+本项目提供一个使用腾讯云边缘函数（Edge Functions）的实现版本。
+
+### 部署指南
+
+1.  **访问EdgeOne边缘函数控制台**:
+2.  **创建边缘函数**: 在控制台中创建一个新的边缘函数。
+3.  **复制代码**: 将 `edge/runtime.js` 文件中的所有代码粘贴到函数代码编辑器中。
+4.  **配置环境变量**: 在函数设置中，添加以下三个环境变量：
+    *   `TG_TOKEN`: 你的 Telegram Bot Token。
+    *   `TG_SIGN_KEY`: 一个自定义的字符串，用于加密 chat\_id。
+    *   `ADMIN_KEY`: 一个自定义的字符串，用作设置 webhook 时的管理密钥。
+5.  **配置触发器**:
+    *   创建一个触发器来将函数绑定到你的域名或一个子路径。
+    *   例如, `example.com/tg-bot/*`。
+6.  **部署并使用**: 保存并部署函数。详细的使用方法请参考 `edge.html`。
+
+## 功能
+
+TG 消息推送机器人,基于 vercel 函数 和 Edgeone 边缘函数 搭建的TG消息推送机器人，无需服务器。
 
 ## 搭建教程
 ### Deploy to Vercel
